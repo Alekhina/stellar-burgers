@@ -7,7 +7,7 @@ import { fetchUserOrders } from '../../services/orders-slice';
 export const ProfileOrders: FC = () => {
   const dispatch = useDispatch();
   const orders: TOrder[] = useSelector((store) => store.userOrders.orders);
-  const { items: ingredients, isLoading: ingredientsLoading } = useSelector(
+  const { items: ingredients } = useSelector(
     (state) => state.ingredients
   );
 

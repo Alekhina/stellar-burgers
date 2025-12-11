@@ -33,8 +33,7 @@ export const createOrder = createAsyncThunk(
   'burgerConstructor/createOrder',
   async (ingredientIds: string[], { rejectWithValue }) => {
     try {
-      const response = await orderBurgerApi(ingredientIds);
-      return response;
+      return await orderBurgerApi(ingredientIds);
     } catch (error) {
       return rejectWithValue((error as Error).message);
     }

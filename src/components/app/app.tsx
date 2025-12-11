@@ -23,11 +23,10 @@ import {
   AppHeader,
   IngredientDetails,
   Modal,
-  FeedInfo,
   OrderInfo
 } from '@components';
 import { ProtectedRoute } from '../protected-route/protected-route';
-import { useDispatch, useSelector } from '../../services/store';
+import { useDispatch } from '../../services/store';
 import { getUser } from '../../services/user-slice';
 const App = () => {
   const location = useLocation();
