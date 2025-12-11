@@ -1,5 +1,5 @@
 import { TIngredient } from '@utils-types';
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { getIngredientsApi } from '@api';
 
 type TIngredientsState = {
@@ -38,11 +38,46 @@ export const fetchIngredients = createAsyncThunk(
   }
 );
 
+const filterIngredients = (ingredients: TIngredient[]) => {
+  const buns = ingredients.filter((item) => item.type === 'bun');
+  const mains = ingredients.filter((item) => item.type === 'main');
+  const sauces = ingredients.filter((item) => item.type === 'sauce');
+
+  return { buns, mains, sauces };
+};
+
 const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
-  reducers: {},
-  extraReducers: () => {}
+  reducers: {
+    setCurrentIngredient: (
+      state,
+      action: PayloadAction<TIngredient | null>
+    ) => {
+      state.currentIngredient = action.payload;
+    }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchIngredients.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchIngredients.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = action.payload;
+        const categorized = filterIngredients(action.payload);
+        state.buns = categorized.buns;
+        state.mains = categorized.mains;
+        state.sauces = categorized.sauces;
+      })
+      .addCase(fetchIngredients.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+  }
 });
 
 export const ingredientsReducer = ingredientsSlice.reducer;
+export const setCurrentIngredient = ingredientsSlice.actions;

@@ -92,7 +92,24 @@ export const burgerSlice = createSlice({
       state.orderModalData = null;
     }
   },
-  extraReducers: () => {}
+  extraReducers: (builder) => {
+    builder
+      .addCase(createOrder.pending, (state) => {
+        state.orderRequest = true;
+        state.error = null;
+      })
+      .addCase(createOrder.fulfilled, (state, action) => {
+        state.orderRequest = false;
+        state.orderModalData = action.payload.order;
+        state.error = null;
+        state.constructorBurger.bun = null;
+        state.constructorBurger.ingredients = [];
+      })
+      .addCase(createOrder.rejected, (state, action) => {
+        state.orderRequest = false;
+        state.error = action.payload as string;
+      });
+  }
 });
 
 export const burgerReducer = burgerSlice.reducer;

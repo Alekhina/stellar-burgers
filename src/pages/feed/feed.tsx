@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from '../../services/store';
 import { fetchFeeds } from '../../services/feed-slice';
 
 export const Feed: FC = () => {
-  const { orders, isLoading } = useSelector((store) => store.feed);
+  const { orders, isLoading } = useSelector((state) => state.feed);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchFeeds());
   }, [dispatch]);
 
-  if (!orders.length) {
+  if (!orders.length || isLoading) {
     return <Preloader />;
   }
 

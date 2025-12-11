@@ -19,6 +19,10 @@ export const getOrderByNumberThunk = createAsyncThunk(
   'orders/getOrderByNumber',
   getOrderByNumberApi
 );
+export const getUserOrders = createAsyncThunk(
+  'userOrders/getUserOrders',
+  getOrdersApi
+);
 
 export const fetchUserOrders = createAsyncThunk(
   'userOrders/fetchAll',
@@ -35,7 +39,21 @@ export const ordersSlice = createSlice({
   name: 'orders',
   initialState,
   reducers: {},
-  extraReducers: () => {}
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUserOrders.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserOrders.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.orders = action.payload;
+      })
+      .addCase(fetchUserOrders.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
+  }
 });
 
 export const ordersReducer = ordersSlice.reducer;

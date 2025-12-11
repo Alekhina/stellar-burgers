@@ -27,9 +27,8 @@ import {
   OrderInfo
 } from '@components';
 import { ProtectedRoute } from '../protected-route/protected-route';
-
 import { useDispatch, useSelector } from '../../services/store';
-
+import { getUser } from '../../services/user-slice';
 const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -37,7 +36,13 @@ const App = () => {
 
   const background = location.state && location.state.background;
 
-  //TODO: прописать useEffect
+  const profileMatch = useMatch('/profile/orders/:number')?.params.number;
+  const feedMatch = useMatch('/feed/:number')?.params.number;
+  const orderNumber = profileMatch || feedMatch;
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
 
   const handleClose = () => {
     navigate(background || -1);
@@ -115,9 +120,7 @@ const App = () => {
             path='/feed/:number'
             element={
               <Modal
-                //TODO:
-                // title={`#${orderNumber && orderNumber.padStart(6, '0')}`}
-                title={'fixme'}
+                title={`#${orderNumber && orderNumber.padStart(6, '0')}`}
                 onClose={handleClose}
               >
                 <OrderInfo />
@@ -137,9 +140,7 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Modal
-                  //TODO:
-                  // title={`#${orderNumber && orderNumber.padStart(6, '0')}`}
-                  title={'fixme'}
+                  title={`#${orderNumber && orderNumber.padStart(6, '0')}`}
                   onClose={handleClose}
                 >
                   <OrderInfo />
