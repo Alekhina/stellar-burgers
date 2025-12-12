@@ -24,7 +24,8 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   }
 
   if (!forAuth && user) {
-    return <Navigate to='/' replace />;
+    const from = location.state?.from || '/';
+    return <Navigate to={from} replace />;
   }
 
   console.log('d');

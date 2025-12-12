@@ -4,7 +4,6 @@ import { OrderInfoUI } from '@ui';
 import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
 import { useParams } from 'react-router-dom';
-import { fetchIngredients } from '../../services/ingredients-slice';
 import { fetchFeeds } from '../../services/feed-slice';
 import { fetchUserOrders } from '../../services/orders-slice';
 
@@ -24,9 +23,6 @@ export const OrderInfo: FC = () => {
   );
 
   useEffect(() => {
-    if (!ingredients.length) {
-      dispatch(fetchIngredients());
-    }
     if (!feedOrders.length) {
       dispatch(fetchFeeds());
     }

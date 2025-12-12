@@ -19,15 +19,11 @@ import {
   useLocation,
   useMatch
 } from 'react-router-dom';
-import {
-  AppHeader,
-  IngredientDetails,
-  Modal,
-  OrderInfo
-} from '@components';
+import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { useDispatch } from '../../services/store';
 import { getUser } from '../../services/user-slice';
+import { fetchIngredients } from '../../services/ingredients-slice';
 const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -41,6 +37,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getUser());
+    dispatch(fetchIngredients());
   }, [dispatch]);
 
   const handleClose = () => {
@@ -50,7 +47,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes>
+      <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route

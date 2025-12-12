@@ -80,4 +80,4 @@ const ingredientsSlice = createSlice({
 });
 
 export const ingredientsReducer = ingredientsSlice.reducer;
-export const setCurrentIngredient = ingredientsSlice.actions;
+export const { setCurrentIngredient } = ingredientsSlice.actions;
