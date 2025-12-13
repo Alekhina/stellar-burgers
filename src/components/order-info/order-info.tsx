@@ -1,21 +1,35 @@
-import { FC, useMemo } from 'react';
-import { Preloader } from '../ui/preloader';
-import { OrderInfoUI } from '../ui/order-info';
+import { FC, useMemo, useEffect } from 'react';
+import { Preloader } from '@ui';
+import { OrderInfoUI } from '@ui';
 import { TIngredient } from '@utils-types';
+import { useDispatch, useSelector } from '../../services/store';
+import { useParams } from 'react-router-dom';
+import { fetchFeeds } from '../../services/feed-slice';
+import { fetchUserOrders } from '../../services/orders-slice';
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0
-  };
+  const { number } = useParams();
+  const dispatch = useDispatch();
 
-  const ingredients: TIngredient[] = [];
+  const feedOrders = useSelector((state) => state.feed.orders);
+  const userOrders = useSelector((state) => state.userOrders.orders);
+
+  const orderData =
+    feedOrders.find((order) => order.number === parseInt(number!)) ||
+    userOrders.find((order) => order.number === parseInt(number!));
+
+  const ingredients: TIngredient[] = useSelector(
+    (state) => state.ingredients.items
+  );
+
+  useEffect(() => {
+    if (!feedOrders.length) {
+      dispatch(fetchFeeds());
+    }
+    if (!userOrders.length) {
+      dispatch(fetchUserOrders());
+    }
+  }, [dispatch, ingredients.length, feedOrders.length, userOrders.length]);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
