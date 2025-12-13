@@ -1,10 +1,10 @@
 import { TUser } from '@utils-types';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { TRegisterData, registerUserApi } from '@api';
-import { TLoginData, loginUserApi } from '@api';
-import { updateUserApi } from '@api';
-import { logoutApi } from '@api';
-import { getUserApi } from '@api';
+import { TRegisterData, registerUserApi } from '../utils/burger-api';
+import { TLoginData, loginUserApi } from '../utils/burger-api';
+import { updateUserApi } from '../utils/burger-api';
+import { logoutApi } from '../utils/burger-api';
+import { getUserApi } from '../utils/burger-api';
 import { setCookie, deleteCookie } from '../utils/cookie';
 
 type TAuthState = {
