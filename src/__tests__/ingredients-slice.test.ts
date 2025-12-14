@@ -30,20 +30,6 @@ describe('проверка ingredientsReducer', () => {
       __v: 0
     },
     {
-      _id: '5',
-      name: 'Sauce',
-      type: 'sauces',
-      proteins: 0,
-      fat: 0,
-      carbohydrates: 0,
-      calories: 0,
-      price: 100,
-      image: 'test.jpg',
-      image_mobile: 'test-mobile.jpg',
-      image_large: 'test-large.jpg',
-      __v: 0
-    },
-    {
       _id: '2',
       name: 'Main',
       type: 'main',
@@ -61,20 +47,6 @@ describe('проверка ingredientsReducer', () => {
       _id: '4',
       name: 'Main',
       type: 'main',
-      proteins: 0,
-      fat: 0,
-      carbohydrates: 0,
-      calories: 0,
-      price: 100,
-      image: 'test.jpg',
-      image_mobile: 'test-mobile.jpg',
-      image_large: 'test-large.jpg',
-      __v: 0
-    },
-    {
-      _id: '3',
-      name: 'Sauce',
-      type: 'sauces',
       proteins: 0,
       fat: 0,
       carbohydrates: 0,
@@ -105,7 +77,6 @@ describe('проверка ingredientsReducer', () => {
     expect(state.isLoading).toBe(false);
     expect(state.buns).toHaveLength(1);
     expect(state.mains).toHaveLength(2);
-    // expect(state.sauces.length).toBe(2);
     expect(state.error).toBeNull();
   });
 
