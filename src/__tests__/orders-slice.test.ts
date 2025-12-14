@@ -1,13 +1,8 @@
 import { ordersReducer, fetchUserOrders } from '../services/orders-slice';
 import { TOrder } from '@utils-types';
+import { initialState } from '../services/orders-slice';
 
 describe('проверка ordersReducer', () => {
-  const initialState = {
-    orders: [],
-    isLoading: false,
-    error: null
-  };
-
   const mockData: TOrder[] = [
     {
       _id: '1',

@@ -1,14 +1,8 @@
 import { userReducer, loginUser } from '../services/user-slice';
 import { TUser } from '@utils-types';
+import { initialState } from '../services/user-slice';
 
 describe('auth reducer', () => {
-  const initialState = {
-    user: null,
-    isAuthChecked: false,
-    isLoading: false,
-    error: null
-  };
-
   const mockData: TUser = {
     email: 'email@ya.com',
     name: 'test user'

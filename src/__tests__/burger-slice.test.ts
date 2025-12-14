@@ -2,20 +2,10 @@ import {
   burgerReducer,
   addIngredient,
   removeIngredient,
-  moveUp,
-  moveDown
+  moveUp
 } from '../services/burger-slice';
+import { initialState } from '../services/burger-slice';
 import { TIngredient } from '@utils-types';
-
-const initialState = {
-  constructorBurger: {
-    bun: null,
-    ingredients: []
-  },
-  orderRequest: false,
-  orderModalData: null,
-  error: null
-};
 
 const mockIngredient: TIngredient = {
   _id: '1',

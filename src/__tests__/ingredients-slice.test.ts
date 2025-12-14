@@ -2,18 +2,9 @@ import {
   ingredientsReducer,
   fetchIngredients
 } from '../services/ingredients-slice';
+import { initialState } from '../services/ingredients-slice';
 
 describe('проверка ingredientsReducer', () => {
-  const initialState = {
-    items: [],
-    buns: [],
-    mains: [],
-    sauces: [],
-    isLoading: false,
-    error: null,
-    currentIngredient: null
-  };
-
   const mockData = [
     {
       _id: '1',
