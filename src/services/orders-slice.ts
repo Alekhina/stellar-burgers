@@ -1,7 +1,7 @@
 import { TOrder } from '@utils-types';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getOrderByNumberApi } from '@api';
-import { getOrdersApi } from '@api';
+import { getOrderByNumberApi } from '../utils/burger-api';
+import { getOrdersApi } from '../utils/burger-api';
 
 type TUserOrdersState = {
   orders: TOrder[];
@@ -9,7 +9,7 @@ type TUserOrdersState = {
   error: string | null;
 };
 
-const initialState: TUserOrdersState = {
+export const initialState: TUserOrdersState = {
   orders: [],
   isLoading: false,
   error: null

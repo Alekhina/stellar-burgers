@@ -5,7 +5,7 @@ import {
   PayloadAction,
   nanoid
 } from '@reduxjs/toolkit';
-import { orderBurgerApi } from '@api';
+import { orderBurgerApi } from '../utils/burger-api';
 
 type TBurgerState = {
   constructorBurger: {
@@ -19,7 +19,7 @@ type TBurgerState = {
   error: string | null;
 };
 
-const initialState: TBurgerState = {
+export const initialState: TBurgerState = {
   constructorBurger: {
     bun: null,
     ingredients: []
